@@ -1,0 +1,76 @@
+data:
+  root: data
+  cache_dir: .cache/faces
+  manifest: artifacts/manifest.csv
+  face_size: 48              # every source is reduced to 48x48 grayscale
+  near_dup_corr: 0.95
+  min_std: 3.0
+  val_fraction: 0.1
+  test_fraction: 0.15
+  seed: 42
+
+model:
+  backbone: convnext_nano.in12k_ft_in1k
+  pretrained: true           # false = random init (see scripts/reproduce.sh for the scratch run)
+  drop_rate: 0.3
+  drop_path_rate: 0.1
+  image_size: 160
+
+train:
+  epochs: 40
+  batch_size: 128
+  lr: 0.001
+  backbone_lr_mult: 0.1
+  weight_decay: 0.05
+  warmup_epochs: 2
+  label_smoothing: 0.1
+  class_weighting: inverse_sqrt
+  ema_decay: 0.999
+  patience: 8
+  amp: true
+  num_workers: 4
+  seed: 42
+  output_dir: runs
+
+app:
+  model_path: models/moodtune.onnx
+  max_upload_mb: 10
+  detector:
+    yunet_path: models/face_detection_yunet_2023mar.onnx
+    score_threshold: 0.7
+    min_face_px: 40
+    margin: 0.1
+    align: true
+  smoothing:
+    ema_alpha: 0.3
+    switch_margin: 0.1
+    min_dwell_s: 1.0
+    reset_after_s: 2.0
+
+# YouTube search queries. Edit freely: each list is tried in order, the first is the main pick.
+music:
+  default_strategy: match    # match = play to the mood, lift = steer towards a better one
+  search_url: "https://www.youtube.com/results?search_query={query}"
+  min_confidence: 0.4
+  queries:
+    happy:
+      match: [feel good pop hits, upbeat happy songs, summer party playlist]
+    neutral:
+      match: [chill lofi beats, relaxed indie acoustic, easy listening playlist]
+    surprise:
+      match: [energetic dance hits, exciting upbeat electronic, high energy workout music]
+    sad:
+      match: [sad songs playlist, emotional piano ballads, melancholy indie songs]
+      lift: [uplifting songs to feel better, hopeful acoustic songs, feel good classics]
+    angry:
+      match: [hard rock anthems, intense metal playlist, aggressive rap workout]
+      lift: [calming ambient music, peaceful piano relax, slow acoustic chill]
+    fear:
+      match: [dark cinematic soundtrack, tense ambient music, suspense film scores]
+      lift: [calm reassuring music, soothing nature sounds music, gentle acoustic songs]
+    disgust:
+      match: [punk rock playlist, grunge classics, angsty alternative rock]
+      lift: [fresh upbeat indie pop, positive vibes playlist, sunny reggae songs]
+    contempt:
+      match: [sarcastic rock songs, confident hip hop playlist, cool attitude songs]
+      lift: [warm soul classics, feel good funk, friendly acoustic pop]

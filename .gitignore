@@ -1,0 +1,19 @@
+# Face images (third-party dataset, people's faces): never commit
+/data/
+
+# Generated
+/.cache/
+/runs/
+/artifacts/
+models/*.onnx
+!models/face_detection_yunet_2023mar.onnx
+
+# Python / tooling
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
