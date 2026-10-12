@@ -3,6 +3,8 @@ name = "moodtune"
 version = "2.0.0"
 description = "Facial-emotion recognition with music suggestions, served from the browser camera."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.11,<3.13"
 dependencies = [
     "torch>=2.5",

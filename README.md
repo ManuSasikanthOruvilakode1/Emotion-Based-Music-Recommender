@@ -316,6 +316,7 @@ Emotion-Based-Music-Recommender/
 ├── Dockerfile                      # inference-only image
 ├── pyproject.toml
 ├── uv.lock
+├── LICENSE                         # MIT
 └── README.md
 ```
 
@@ -328,3 +329,9 @@ artifacts/       # manifest.csv, split_report.json, logs
 runs/            # checkpoints, metrics and report figures per training run
 models/moodtune.onnx   # the exported emotion model (`moodtune export`)
 ```
+
+## License
+
+The code is released under the [MIT License](LICENSE). The MIT license covers this
+repository's code only: the face images used for training are third-party data and are not
+included, and the YuNet model in `models/` is distributed by OpenCV under its own license.
