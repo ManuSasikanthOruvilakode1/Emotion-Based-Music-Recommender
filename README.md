@@ -1,4 +1,4 @@
-# MoodTune: facial-emotion music recommender
+# MoodTune: facial-emotion music recommender 
 
 MoodTune reads your facial expression from the browser camera (or an uploaded photo),
 classifies it into one of eight emotions, and suggests music as YouTube search links. You
