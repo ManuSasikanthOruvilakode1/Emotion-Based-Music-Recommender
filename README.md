@@ -4,6 +4,8 @@ MoodTune reads your facial expression from the browser camera (or an uploaded ph
 classifies it into one of eight emotions, and suggests music as YouTube search links. You
 choose whether the music should **match** your mood or **lift** it.
 
+Quick links: [Repository](https://github.com/ManuSasikanthOruvilakode1/MoodTune-Facial-Emotion-Music-Recommender) | [License (MIT)](LICENSE)
+
 Every number below comes from a held-out test set of faces that, along with any copies of
 them, never appeared in training. `scripts/reproduce.sh` regenerates all of them from the raw
 image folders.
@@ -252,7 +254,7 @@ The original code is kept in `legacy/` for reference (without the unloadable `mo
 ## Project structure
 
 ```
-Emotion-Based-Music-Recommender/
+MoodTune-Facial-Emotion-Music-Recommender/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                  # lint + tests on every push (CPU-only torch)
